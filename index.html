@@ -204,10 +204,39 @@ section{
   .momento,.momento:nth-child(even){justify-content:flex-start}
   .card{margin-left:30px}
 }
+#botaoMusica{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:10px 18px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.6);
+  background:rgba(0,0,0,.3);
+  color:#fff;
+  font-size:14px;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+  transition:.3s;
+  z-index:999;
+}
+
+#botaoMusica:hover{
+  background:rgba(255,255,255,.1);
+  transform:scale(1.05);
+}
+
 </style>
 </head>
 
 <body>
+  <audio id="musica" loop>
+  <source src="music/musica.mp3" type="audio/mpeg">
+</audio>
+
+<button id="botaoMusica" onclick="toggleMusica()">
+  ▶ música
+</button>
+
 
 <div class="hero">
   <div>
@@ -358,6 +387,28 @@ function mostrarSegredo(){
 
 document.getElementById("dataFinal").innerText=
   "registrado em "+new Date().toLocaleDateString("pt-BR");
+  
+
+
+let tocando=false;
+
+function toggleMusica(){
+  const m=document.getElementById("musica");
+  const b=document.getElementById("botaoMusica");
+
+  if(!tocando){
+    m.volume=0.4;
+    m.play();
+    b.innerText="⏸ música";
+  }else{
+    m.pause();
+    b.innerText="▶ música";
+  }
+  tocando=!tocando;
+}
+
+
+
 </script>
 
 </body>
